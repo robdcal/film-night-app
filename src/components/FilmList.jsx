@@ -67,9 +67,6 @@ const FilmList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" onClick={() => supabase.auth.signOut()}>
-        Sign Out
-      </Button>
     </Fragment>
   );
 };
