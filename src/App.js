@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState, useEffect } from "react";
+import { supabase } from "./supabaseClient";
+import { Fragment } from "react";
+import Auth from "./components/Auth";
+import FilmList from "./components/FilmList";
+import { Container } from "@mui/system";
+import Typography from "@mui/material/Typography";
 
-function App() {
+const App = () => {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    setSession(supabase.auth.session());
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm">
+      <Typography component="h1" variant="h3">
+        Film Night
+      </Typography>
+      {!session ? (
+        <Auth />
+      ) : (
+        <FilmList key={session.user.id} session={session} />
+      )}
+    </Container>
   );
-}
+};
 
 export default App;
