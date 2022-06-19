@@ -2,7 +2,7 @@
 
 ## To do
 
-- Add a film to the list
+- ~~Add a film to the list~~
 - Mark a film as watched / add a rating
 - Edit a film
 - Delete a film
