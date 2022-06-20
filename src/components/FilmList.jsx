@@ -1,22 +1,19 @@
 import { supabase } from "../supabaseClient";
 import { Fragment, useEffect, useState } from "react";
-import { Typography } from "@mui/material";
-import { Button } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteFilm from "./DeleteFilm";
 
 const FilmList = () => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
     fetchFilms().catch(console.error);
-  }, []);
+  }, [films]);
 
   const fetchFilms = async () => {
     let { data: films, error } = await supabase
@@ -25,15 +22,6 @@ const FilmList = () => {
       .order("id", { ascending: false });
     if (error) console.log("error", error);
     else setFilms(films);
-  };
-
-  const deleteFilm = async (id) => {
-    try {
-      await supabase.from("film").delete().eq("id", id);
-      setFilms(films.filter((x) => x.id !== id));
-    } catch (error) {
-      console.log("error", error);
-    }
   };
 
   return (
@@ -57,10 +45,7 @@ const FilmList = () => {
                 <TableCell>{film.owner}</TableCell>
                 <TableCell>{film.c_rating + film.r_rating}</TableCell>
                 <TableCell>
-                  {" "}
-                  <IconButton aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
+                  <DeleteFilm films={films} setFilms={setFilms} id={film.id} />
                 </TableCell>
               </TableRow>
             ))}
