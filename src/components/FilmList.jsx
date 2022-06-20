@@ -7,13 +7,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import DeleteFilm from "./DeleteFilm";
+import EditFilm from "./EditFilm";
 
 const FilmList = () => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
     fetchFilms().catch(console.error);
-  }, [films]);
+  }, []);
 
   const fetchFilms = async () => {
     let { data: films, error } = await supabase
@@ -33,17 +34,26 @@ const FilmList = () => {
               <TableCell>Film Name</TableCell>
               <TableCell>Owner</TableCell>
               <TableCell>Rating</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {films.map((film) => (
-              <TableRow key={film.id}>
+            {films.map((film, index) => (
+              <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   {film.name}
                 </TableCell>
                 <TableCell>{film.owner}</TableCell>
                 <TableCell>{film.c_rating + film.r_rating}</TableCell>
+                <TableCell>
+                  <EditFilm
+                    index={index}
+                    film={film}
+                    films={films}
+                    setFilms={setFilms}
+                  />
+                </TableCell>
                 <TableCell>
                   <DeleteFilm films={films} setFilms={setFilms} id={film.id} />
                 </TableCell>
