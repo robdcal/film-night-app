@@ -16,7 +16,11 @@ const DeleteFilm = ({ films, setFilms, id }) => {
   };
 
   return (
-    <IconButton aria-label="delete" onClick={() => deleteFilm(id)}>
+    <IconButton
+      aria-label="delete"
+      component="button"
+      onClick={() => deleteFilm(id)}
+    >
       <DeleteIcon />
     </IconButton>
   );
