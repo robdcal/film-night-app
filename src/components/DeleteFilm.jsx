@@ -1,6 +1,5 @@
 import { supabase } from "../supabaseClient";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
 
 const DeleteFilm = ({ films, setFilms, id }) => {
   const deleteFilm = async (id) => {
@@ -16,13 +15,14 @@ const DeleteFilm = ({ films, setFilms, id }) => {
   };
 
   return (
-    <IconButton
+    <Button
       aria-label="delete"
       component="button"
+      color="error"
       onClick={() => deleteFilm(id)}
     >
-      <DeleteIcon />
-    </IconButton>
+      Delete
+    </Button>
   );
 };
 

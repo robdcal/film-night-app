@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import DeleteFilm from "./DeleteFilm";
+// import DeleteFilm from "./DeleteFilm";
 import EditFilm from "./EditFilm";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -60,7 +60,7 @@ const FilmList = () => {
               <TableCell>Owner</TableCell>
               {watchedToggle === "watched" && <TableCell>Rating</TableCell>}
               <TableCell></TableCell>
-              <TableCell></TableCell>
+              {/* <TableCell></TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -81,9 +81,9 @@ const FilmList = () => {
                     setFilms={setFilms}
                   />
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <DeleteFilm films={films} setFilms={setFilms} id={film.id} />
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>

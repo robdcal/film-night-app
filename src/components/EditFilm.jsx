@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
+import DeleteFilm from "./DeleteFilm";
 
 const EditFilm = ({ index, film, films, setFilms }) => {
   const [open, setOpen] = useState(false);
@@ -132,6 +133,9 @@ const EditFilm = ({ index, film, films, setFilms }) => {
           )}
         </DialogContent>
         <DialogActions>
+          <Box sx={{ mr: "auto" }}>
+            <DeleteFilm films={films} setFilms={setFilms} id={film.id} />
+          </Box>
           <Button onClick={updateFilm} variant="contained">
             Save
           </Button>
