@@ -12,7 +12,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Box } from "@mui/system";
-import FilmList from "./FilmList";
 
 const EditFilm = ({ index, film, films, setFilms }) => {
   const [open, setOpen] = useState(false);
@@ -36,6 +35,7 @@ const EditFilm = ({ index, film, films, setFilms }) => {
   };
 
   const updateFilm = async () => {
+    console.log(films[index]);
     try {
       const { data, error } = await supabase
         .from("films")
@@ -48,16 +48,17 @@ const EditFilm = ({ index, film, films, setFilms }) => {
         })
         .match({ id: film.id });
       console.log(films);
-      setFilms([
-        ...films,
-        (films[index] = {
-          name: name,
-          owner: owner,
-          watched: watched,
-          c_rating: cRating,
-          r_rating: rRating,
-        }),
-      ]);
+      const updatedFilm = {
+        id: film.id,
+        name: name,
+        owner: owner,
+        watched: watched,
+        c_rating: cRating,
+        r_rating: rRating,
+      };
+      const newFilms = [...films];
+      newFilms[index] = updatedFilm;
+      setFilms(newFilms);
       handleClose();
     } catch (error) {
       console.error(error.message);
