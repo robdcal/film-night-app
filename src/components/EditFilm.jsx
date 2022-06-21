@@ -13,8 +13,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import DeleteFilm from "./DeleteFilm";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
-const EditFilm = ({ index, film, films, setFilms }) => {
+const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [owner, setOwner] = useState("");
@@ -67,7 +68,7 @@ const EditFilm = ({ index, film, films, setFilms }) => {
   return (
     <Fragment>
       <IconButton component="button" onClick={handleClickOpen}>
-        <EditIcon />
+        {watchedToggle === "watched" ? <EditIcon /> : <VisibilityIcon />}
       </IconButton>
       <Dialog open={open} onClose={handleClose}>
         <IconButton

@@ -79,6 +79,7 @@ const FilmList = () => {
                     film={film}
                     films={films}
                     setFilms={setFilms}
+                    watchedToggle={watchedToggle}
                   />
                 </TableCell>
                 {/* <TableCell>
