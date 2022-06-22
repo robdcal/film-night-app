@@ -32,7 +32,7 @@ const App = () => {
       ) : (
         <Fragment>
           <FilmList key={session.user.id} session={session} />
-          <BottomBar />
+          <BottomBar session={session} />
         </Fragment>
       )}
     </Container>

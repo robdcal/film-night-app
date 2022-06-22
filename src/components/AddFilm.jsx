@@ -20,7 +20,7 @@ const StyledFab = styled(Fab)({
   margin: "0 auto",
 });
 
-const AddFilm = () => {
+const AddFilm = ({ session }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
 
@@ -37,7 +37,7 @@ const AddFilm = () => {
     try {
       const { data, error } = await supabase
         .from("films")
-        .insert([{ name: name }]);
+        .insert([{ name: name, owner: session.user.user_metadata.name }]);
       handleClose();
     } catch (error) {
       console.error(error.message);
