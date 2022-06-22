@@ -118,7 +118,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
           />
           {watched && (
             <Fragment>
-              <Box sx={{ display: "flex", gap: 2 }}>
+              <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
                 <TextField
                   margin="normal"
                   label="Claire's rating"
