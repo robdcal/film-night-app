@@ -6,7 +6,7 @@
 - ~~Delete a film~~
 - ~~Edit a film (edit name, edit owner, mark a film as watched, add ratings)~~
 - ~~Split watched / unwatched film lists~~
-- Optional notes
+- ~~Optional notes~~
 - Sortable table
 - Move state to Context
 - Pull synopsis from move database
