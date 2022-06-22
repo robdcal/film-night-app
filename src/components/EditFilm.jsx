@@ -14,6 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import DeleteFilm from "./DeleteFilm";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Typography } from "@mui/material";
 
 const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,10 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
   const [cRating, setCRating] = useState(0);
   const [rRating, setRRating] = useState(0);
   const [notes, setNotes] = useState("");
+
+  const createdDate = new Date(film.created_at)
+    .toDateString()
+    .toLocaleString("en-GB");
 
   const handleClickOpen = () => {
     setName(film.name || "");
@@ -97,14 +102,16 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
             onChange={(e) => setName(e.target.value)}
             fullWidth
           />
-          <TextField
+          <Typography>{`Added on ${createdDate}`}</Typography>
+          <Typography>{`by ${owner}`}</Typography>
+          {/* <TextField
             margin="normal"
             label="Owner"
             variant="outlined"
             value={owner}
             onChange={(e) => setOwner(e.target.value)}
             fullWidth
-          />
+          /> */}
           <FormControlLabel
             control={
               <Checkbox
