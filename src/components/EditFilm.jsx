@@ -1,5 +1,5 @@
 import { supabase } from "../supabaseClient";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -15,8 +15,9 @@ import Box from "@mui/material/Box";
 import DeleteFilm from "./DeleteFilm";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Typography } from "@mui/material";
+import AppContext from "../contexts/AppContext";
 
-const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
+const EditFilm = ({ index, film, watchedToggle }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [owner, setOwner] = useState("");
@@ -24,6 +25,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
   const [cRating, setCRating] = useState(0);
   const [rRating, setRRating] = useState(0);
   const [notes, setNotes] = useState("");
+  const { films, setFilms } = useContext(AppContext);
 
   const createdDate = new Date(film.created_at)
     .toDateString()

@@ -1,7 +1,11 @@
 import { supabase } from "../supabaseClient";
 import Button from "@mui/material/Button";
+import AppContext from "../contexts/AppContext";
+import { useContext } from "react";
 
-const DeleteFilm = ({ films, setFilms, id }) => {
+const DeleteFilm = ({ id }) => {
+  const { films, setFilms } = useContext(AppContext);
+
   const deleteFilm = async (id) => {
     try {
       const { data, error } = await supabase

@@ -1,5 +1,5 @@
 import { supabase } from "../supabaseClient";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -8,8 +8,8 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import AppContext from "../contexts/AppContext";
 
 const StyledFab = styled(Fab)({
   position: "absolute",
@@ -20,9 +20,10 @@ const StyledFab = styled(Fab)({
   margin: "0 auto",
 });
 
-const AddFilm = ({ session }) => {
+const AddFilm = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
+  const { session } = useContext(AppContext);
 
   const handleClickOpen = () => {
     setName("");

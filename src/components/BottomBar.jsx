@@ -6,14 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AddFilm from "./AddFilm";
 
-const BottomBar = ({ session }) => {
+const BottomBar = () => {
   return (
     <AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
       <Toolbar>
-        {/* <StyledFab color="secondary" aria-label="add">
-          <AddIcon />
-        </StyledFab> */}
-        <AddFilm session={session} />
+        <AddFilm />
         <Box sx={{ flexGrow: 1 }} />
         <IconButton color="inherit" onClick={() => supabase.auth.signOut()}>
           <LogoutIcon />
