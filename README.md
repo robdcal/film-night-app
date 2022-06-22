@@ -11,7 +11,7 @@ Build a list of films to watch,
 - ~~Optional notes~~
 - ~~Add date of when a film was watched~~
 - ~~Set film owner to user (via auth)~~
-- Move state to Context
+- ~~Move state to Context~~
 - Sortable table
 - Allow user to re-order list (and remember it)
 - Setup 'groups' feature with corresponding auth checks
