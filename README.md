@@ -14,6 +14,7 @@ Build a list of films to watch,
 - Move state to Context
 - Sortable table
 - Allow user to re-order list (and remember it)
-- Add basic analytics / data vis
 - Setup 'groups' feature with corresponding auth checks
+- Set film owner to user (via auth) and disble editing
 - Improve visuals
+- Add basic analytics / data vis
