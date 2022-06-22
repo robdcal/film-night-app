@@ -22,6 +22,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
   const [watched, setWatched] = useState(false);
   const [cRating, setCRating] = useState(0);
   const [rRating, setRRating] = useState(0);
+  const [notes, setNotes] = useState("");
 
   const handleClickOpen = () => {
     setName(film.name || "");
@@ -29,6 +30,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
     setWatched(film.watched || false);
     setCRating(film.c_rating || "");
     setRRating(film.r_rating || "");
+    setNotes(film.notes || "");
     setOpen(true);
   };
 
@@ -46,6 +48,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
           watched: watched,
           c_rating: parseInt(cRating) || null,
           r_rating: parseInt(rRating) || null,
+          notes: notes || null,
         })
         .match({ id: film.id });
       const updatedFilm = {
@@ -55,6 +58,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
         watched: watched,
         c_rating: parseInt(cRating),
         r_rating: parseInt(rRating),
+        notes: notes,
       };
       const newFilms = [...films];
       newFilms[index] = updatedFilm;
@@ -121,6 +125,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
                 value={cRating}
                 onChange={(e) => setCRating(e.target.value)}
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                fullWidth
               />
               <TextField
                 margin="normal"
@@ -129,6 +134,16 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
                 value={rRating}
                 onChange={(e) => setRRating(e.target.value)}
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                fullWidth
+              />
+              <TextField
+                label="Notes"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                multiline
+                minRows={4}
+                variant="outlined"
+                fullWidth
               />
             </Box>
           )}
