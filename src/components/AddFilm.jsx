@@ -52,27 +52,19 @@ const AddFilm = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add a Film</DialogTitle>
         <DialogContent>
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText> */}
           <TextField
             autoFocus
-            // margin="dense"
-            id="name"
             label="Film name"
             type="text"
             fullWidth
             variant="standard"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            sx={{ width: "40ch" }}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button
-            // onClick={handleClose}
             variant="contained"
             onClick={addNewFilm}
             disabled={name.length === 0}
