@@ -117,25 +117,27 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
             label="Watched"
           />
           {watched && (
-            <Box>
-              <TextField
-                margin="normal"
-                label="Claire's rating"
-                variant="outlined"
-                value={cRating}
-                onChange={(e) => setCRating(e.target.value)}
-                inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                fullWidth
-              />
-              <TextField
-                margin="normal"
-                label="Rob's rating"
-                variant="outlined"
-                value={rRating}
-                onChange={(e) => setRRating(e.target.value)}
-                inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                fullWidth
-              />
+            <Fragment>
+              <Box sx={{ display: "flex", gap: 2 }}>
+                <TextField
+                  margin="normal"
+                  label="Claire's rating"
+                  variant="outlined"
+                  value={cRating}
+                  onChange={(e) => setCRating(e.target.value)}
+                  inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                  // fullWidth
+                />
+                <TextField
+                  margin="normal"
+                  label="Rob's rating"
+                  variant="outlined"
+                  value={rRating}
+                  onChange={(e) => setRRating(e.target.value)}
+                  inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                  // fullWidth
+                />
+              </Box>
               <TextField
                 label="Notes"
                 value={notes}
@@ -145,7 +147,7 @@ const EditFilm = ({ index, film, films, setFilms, watchedToggle }) => {
                 variant="outlined"
                 fullWidth
               />
-            </Box>
+            </Fragment>
           )}
         </DialogContent>
         <DialogActions>
