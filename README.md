@@ -10,11 +10,11 @@ Build a list of films to watch,
 - ~~Split watched / unwatched film lists~~
 - ~~Optional notes~~
 - ~~Add date of when a film was watched~~
-- Pull synopsis from move database
+- ~~Set film owner to user (via auth)~~
 - Move state to Context
 - Sortable table
 - Allow user to re-order list (and remember it)
 - Setup 'groups' feature with corresponding auth checks
-- Set film owner to user (via auth)
+- Pull synopsis from movie database & store
 - Improve visuals
 - Add basic analytics / data vis
