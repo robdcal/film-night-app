@@ -1,6 +1,6 @@
-# Film Night app
+# Film Night app (name TBC)
 
-Build a list of films to watch,
+Create a group, build a list of films to watch (or books to read, or games to play) and rate them!
 
 ## To do
 
@@ -15,11 +15,13 @@ Build a list of films to watch,
 - ~~Automatically update (re-render) list after adding / deleting / editing~~
 - ~~Make it more generic (not only films) - books, games, etc~~
 - Setup 'groups' feature with corresponding auth checks
-- Pull synopsis from movie database & store
+- Pull synopsis from movie database & store in Supabase
 - Add summary screen (basic analytics / data vis)
-- Improve visuals
 - Sortable table
-- Allow user to manually re-order list (and remember it)
 - Filters for table
+- Improve visuals
+- Move API calls to node server
+- Host app
 - Convert to TypeScript
 - Write tests
+- Allow user to manually re-order list (and remember it)
