@@ -12,9 +12,11 @@ Build a list of films to watch,
 - ~~Add date of when a film was watched~~
 - ~~Set film owner to user (via auth)~~
 - ~~Move state to Context~~
-- Sortable table
-- Allow user to re-order list (and remember it)
+- Automatically update (re-render) list after adding / deleting / editing
 - Setup 'groups' feature with corresponding auth checks
 - Pull synopsis from movie database & store
+- Add summary screen (basic analytics / data vis)
 - Improve visuals
-- Add basic analytics / data vis
+- Sortable table
+- Allow user to manually re-order list (and remember it)
+- Filters for table
