@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import AppContext from "../contexts/AppContext";
 import { useContext } from "react";
 
-const DeleteFilm = ({ id }) => {
+const DeleteFilm = ({ id, handleClose }) => {
   const { films, setFilms } = useContext(AppContext);
 
   const deleteFilm = async (id) => {
@@ -13,6 +13,7 @@ const DeleteFilm = ({ id }) => {
         .delete()
         .match({ id: id });
       setFilms(films.filter((x) => x.id !== id));
+      handleClose();
     } catch (error) {
       console.error(error.message);
     }

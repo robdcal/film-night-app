@@ -161,7 +161,12 @@ const EditFilm = ({ index, film, watchedToggle }) => {
         </DialogContent>
         <DialogActions>
           <Box sx={{ mr: "auto" }}>
-            <DeleteFilm films={films} setFilms={setFilms} id={film.id} />
+            <DeleteFilm
+              films={films}
+              setFilms={setFilms}
+              id={film.id}
+              handleClose={handleClose}
+            />
           </Box>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={updateFilm} variant="contained">
