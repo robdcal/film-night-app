@@ -14,7 +14,24 @@ import AppContext from "../contexts/AppContext";
 
 const ItemList = () => {
   const [watchedToggle, setWatchedToggle] = useState("watchlist");
-  const { items, setItems } = useContext(AppContext);
+  const { session, items, setItems } = useContext(AppContext);
+
+  useEffect(() => {
+    updateUsername();
+  }, []);
+
+  const updateUsername = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("users")
+        .update({
+          username: session.user.user_metadata.name,
+        })
+        .match({ user_id: session.user.id });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const toggleWatchedItems = () => {
     setWatchedToggle(watchedToggle === "watchlist" ? "watched" : "watchlist");
