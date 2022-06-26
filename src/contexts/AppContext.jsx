@@ -5,6 +5,7 @@ const AppContext = createContext({
   session: null,
   films: [],
   setFilms: () => {},
+  fetchFilms: () => {},
 });
 
 export const AppContextProvider = (props) => {
@@ -38,6 +39,7 @@ export const AppContextProvider = (props) => {
         session: session,
         films: films,
         setFilms: setFilms,
+        fetchFilms: fetchFilms,
       }}
     >
       {props.children}

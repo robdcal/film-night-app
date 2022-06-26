@@ -23,7 +23,7 @@ const StyledFab = styled(Fab)({
 const AddFilm = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const { session } = useContext(AppContext);
+  const { session, films, setFilms, fetchFilms } = useContext(AppContext);
 
   const handleClickOpen = () => {
     setName("");
@@ -36,9 +36,9 @@ const AddFilm = () => {
 
   const addNewFilm = async () => {
     try {
-      const { data, error } = await supabase
-        .from("films")
-        .insert([{ name: name, owner: session.user.user_metadata.name }]);
+      const newFilm = { name: name, owner: session.user.user_metadata.name };
+      const { data, error } = await supabase.from("films").insert([newFilm]);
+      fetchFilms();
       handleClose();
     } catch (error) {
       console.error(error.message);
