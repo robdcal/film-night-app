@@ -12,12 +12,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
-import DeleteFilm from "./DeleteFilm";
+import DeleteItem from "./DeleteItem";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Typography } from "@mui/material";
 import AppContext from "../contexts/AppContext";
 
-const EditFilm = ({ index, film, watchedToggle }) => {
+const EditItem = ({ index, item, watchedToggle }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [owner, setOwner] = useState("");
@@ -25,19 +25,19 @@ const EditFilm = ({ index, film, watchedToggle }) => {
   const [cRating, setCRating] = useState(0);
   const [rRating, setRRating] = useState(0);
   const [notes, setNotes] = useState("");
-  const { films, setFilms } = useContext(AppContext);
+  const { items, setItems } = useContext(AppContext);
 
-  const createdDate = new Date(film.created_at)
+  const createdDate = new Date(item.created_at)
     .toDateString()
     .toLocaleString("en-GB");
 
   const handleClickOpen = () => {
-    setName(film.name || "");
-    setOwner(film.owner || "");
-    setWatched(film.watched || false);
-    setCRating(film.c_rating || "");
-    setRRating(film.r_rating || "");
-    setNotes(film.notes || "");
+    setName(item.name || "");
+    setOwner(item.owner || "");
+    setWatched(item.watched || false);
+    setCRating(item.c_rating || "");
+    setRRating(item.r_rating || "");
+    setNotes(item.notes || "");
     setOpen(true);
   };
 
@@ -45,10 +45,10 @@ const EditFilm = ({ index, film, watchedToggle }) => {
     setOpen(false);
   };
 
-  const updateFilm = async () => {
+  const updateItem = async () => {
     try {
       const { data, error } = await supabase
-        .from("films")
+        .from("items")
         .update({
           name: name,
           owner: owner || null,
@@ -57,9 +57,9 @@ const EditFilm = ({ index, film, watchedToggle }) => {
           r_rating: parseInt(rRating) || null,
           notes: notes || null,
         })
-        .match({ id: film.id });
-      const updatedFilm = {
-        id: film.id,
+        .match({ item_id: item.item_id });
+      const updatedItem = {
+        item_id: item.item_id,
         name: name,
         owner: owner,
         watched: watched,
@@ -67,9 +67,9 @@ const EditFilm = ({ index, film, watchedToggle }) => {
         r_rating: parseInt(rRating),
         notes: notes,
       };
-      const newFilms = [...films];
-      newFilms[index] = updatedFilm;
-      setFilms(newFilms);
+      const newItems = [...items];
+      newItems[index] = updatedItem;
+      setItems(newItems);
       handleClose();
     } catch (error) {
       console.error(error.message);
@@ -94,11 +94,11 @@ const EditFilm = ({ index, film, watchedToggle }) => {
         >
           <CloseIcon />
         </IconButton>
-        <DialogTitle>Update Film</DialogTitle>
+        <DialogTitle>Update Item</DialogTitle>
         <DialogContent sx={{ width: 500, maxWidth: "100%" }}>
           <TextField
             margin="normal"
-            label="Film name"
+            label="Item name"
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -161,15 +161,15 @@ const EditFilm = ({ index, film, watchedToggle }) => {
         </DialogContent>
         <DialogActions>
           <Box sx={{ mr: "auto" }}>
-            <DeleteFilm
-              films={films}
-              setFilms={setFilms}
-              id={film.id}
+            <DeleteItem
+              items={items}
+              setItems={setItems}
+              item_id={item.item_id}
               handleClose={handleClose}
             />
           </Box>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={updateFilm} variant="contained">
+          <Button onClick={updateItem} variant="contained">
             Save
           </Button>
         </DialogActions>
@@ -178,4 +178,4 @@ const EditFilm = ({ index, film, watchedToggle }) => {
   );
 };
 
-export default EditFilm;
+export default EditItem;

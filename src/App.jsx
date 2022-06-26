@@ -2,7 +2,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useContext } from "react";
 import { Fragment } from "react";
 import Auth from "./components/Auth";
-import FilmList from "./components/FilmList";
+import ItemList from "./components/ItemList";
 import { Container } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import BottomBar from "./components/BottomBar";
@@ -15,13 +15,13 @@ const App = () => {
     <Container maxWidth="sm">
       <CssBaseline />
       <Typography component="h1" variant="h3" align="center" mt={4}>
-        Film Night
+        Name TBC
       </Typography>
       {!session ? (
         <Auth />
       ) : (
         <Fragment>
-          <FilmList key={session.user.id} session={session} />
+          <ItemList key={session.user.id} session={session} />
           <BottomBar session={session} />
         </Fragment>
       )}

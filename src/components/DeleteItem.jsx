@@ -3,16 +3,16 @@ import Button from "@mui/material/Button";
 import AppContext from "../contexts/AppContext";
 import { useContext } from "react";
 
-const DeleteFilm = ({ id, handleClose }) => {
-  const { films, setFilms } = useContext(AppContext);
+const DeleteItem = ({ item_id, handleClose }) => {
+  const { items, setItems } = useContext(AppContext);
 
-  const deleteFilm = async (id) => {
+  const deleteItem = async (item_id) => {
     try {
       const { data, error } = await supabase
-        .from("films")
+        .from("items")
         .delete()
-        .match({ id: id });
-      setFilms(films.filter((x) => x.id !== id));
+        .match({ item_id: item_id });
+      setItems(items.filter((x) => x.item_id !== item_id));
       handleClose();
     } catch (error) {
       console.error(error.message);
@@ -24,11 +24,11 @@ const DeleteFilm = ({ id, handleClose }) => {
       aria-label="delete"
       component="button"
       color="error"
-      onClick={() => deleteFilm(id)}
+      onClick={() => deleteItem(item_id)}
     >
       Delete
     </Button>
   );
 };
 
-export default DeleteFilm;
+export default DeleteItem;

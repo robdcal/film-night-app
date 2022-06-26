@@ -20,10 +20,10 @@ const StyledFab = styled(Fab)({
   margin: "0 auto",
 });
 
-const AddFilm = () => {
+const AddItem = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const { session, films, setFilms, fetchFilms } = useContext(AppContext);
+  const { session, items, setItems, fetchItems } = useContext(AppContext);
 
   const handleClickOpen = () => {
     setName("");
@@ -34,11 +34,11 @@ const AddFilm = () => {
     setOpen(false);
   };
 
-  const addNewFilm = async () => {
+  const addNewItem = async () => {
     try {
-      const newFilm = { name: name, owner: session.user.user_metadata.name };
-      const { data, error } = await supabase.from("films").insert([newFilm]);
-      fetchFilms();
+      const newItem = { name: name, owner: session.user.user_metadata.name };
+      const { data, error } = await supabase.from("items").insert([newItem]);
+      fetchItems();
       handleClose();
     } catch (error) {
       console.error(error.message);
@@ -51,11 +51,11 @@ const AddFilm = () => {
         <AddIcon />
       </StyledFab>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add a Film</DialogTitle>
+        <DialogTitle>Add a Item</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
-            label="Film name"
+            label="Item name"
             type="text"
             fullWidth
             variant="standard"
@@ -67,7 +67,7 @@ const AddFilm = () => {
           <Button onClick={handleClose}>Cancel</Button>
           <Button
             variant="contained"
-            onClick={addNewFilm}
+            onClick={addNewItem}
             disabled={name.length === 0}
           >
             Save
@@ -78,4 +78,4 @@ const AddFilm = () => {
   );
 };
 
-export default AddFilm;
+export default AddItem;

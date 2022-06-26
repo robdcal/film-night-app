@@ -3,14 +3,14 @@ import { supabase } from "../supabaseClient";
 
 const AppContext = createContext({
   session: null,
-  films: [],
-  setFilms: () => {},
-  fetchFilms: () => {},
+  items: [],
+  setItems: () => {},
+  fetchItems: () => {},
 });
 
 export const AppContextProvider = (props) => {
   const [session, setSession] = useState(null);
-  const [films, setFilms] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     setSession(supabase.auth.session());
@@ -21,25 +21,25 @@ export const AppContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    fetchFilms().catch(console.error);
+    fetchItems().catch(console.error);
   }, []);
 
-  const fetchFilms = async () => {
-    let { data: films, error } = await supabase
-      .from("films")
+  const fetchItems = async () => {
+    let { data: items, error } = await supabase
+      .from("items")
       .select("*")
-      .order("id", { ascending: false });
+      .order("item_id", { ascending: false });
     if (error) console.log("error", error);
-    else setFilms(films);
+    else setItems(items);
   };
 
   return (
     <AppContext.Provider
       value={{
         session: session,
-        films: films,
-        setFilms: setFilms,
-        fetchFilms: fetchFilms,
+        items: items,
+        setItems: setItems,
+        fetchItems: fetchItems,
       }}
     >
       {props.children}

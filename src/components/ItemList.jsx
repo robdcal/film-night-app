@@ -6,24 +6,24 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import EditFilm from "./EditFilm";
+import EditItem from "./EditItem";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Box from "@mui/material/Box";
 import AppContext from "../contexts/AppContext";
 
-const FilmList = () => {
+const ItemList = () => {
   const [watchedToggle, setWatchedToggle] = useState("watchlist");
-  const { films, setFilms } = useContext(AppContext);
+  const { items, setItems } = useContext(AppContext);
 
-  const toggleWatchedFilms = () => {
+  const toggleWatchedItems = () => {
     setWatchedToggle(watchedToggle === "watchlist" ? "watched" : "watchlist");
   };
 
-  const filteredFilms = films.filter(
+  const filteredItems = items.filter(
     watchedToggle === "watched"
-      ? (film) => film.watched
-      : (film) => !film.watched
+      ? (item) => item.watched
+      : (item) => !item.watched
   );
 
   return (
@@ -33,7 +33,7 @@ const FilmList = () => {
           color="primary"
           value={watchedToggle}
           exclusive
-          onChange={toggleWatchedFilms}
+          onChange={toggleWatchedItems}
         >
           <ToggleButton value="watchlist">Watch List</ToggleButton>
           <ToggleButton value="watched">Watched</ToggleButton>
@@ -43,7 +43,7 @@ const FilmList = () => {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>Film Name</TableCell>
+              <TableCell>Item Name</TableCell>
               <TableCell>Owner</TableCell>
               {watchedToggle === "watched" && <TableCell>Rating</TableCell>}
               <TableCell></TableCell>
@@ -51,25 +51,25 @@ const FilmList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredFilms.map((film, index) => (
+            {filteredItems.map((item, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  {film.name}
+                  {item.name}
                 </TableCell>
-                <TableCell>{film.owner}</TableCell>
+                <TableCell>{item.owner}</TableCell>
                 {watchedToggle === "watched" && (
                   <TableCell>
-                    {film.c_rating && film.r_rating
-                      ? film.c_rating + film.r_rating
+                    {item.c_rating && item.r_rating
+                      ? item.c_rating + item.r_rating
                       : "TBC"}
                   </TableCell>
                 )}
                 <TableCell>
-                  <EditFilm
+                  <EditItem
                     index={index}
-                    film={film}
-                    films={films}
-                    setFilms={setFilms}
+                    item={item}
+                    items={items}
+                    setItems={setItems}
                     watchedToggle={watchedToggle}
                   />
                 </TableCell>
@@ -82,4 +82,4 @@ const FilmList = () => {
   );
 };
 
-export default FilmList;
+export default ItemList;
