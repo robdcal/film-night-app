@@ -6,11 +6,13 @@ const AppContext = createContext({
   items: [],
   setItems: () => {},
   fetchItems: () => {},
+  screen: "welcome",
 });
 
 export const AppContextProvider = (props) => {
   const [session, setSession] = useState(null);
   const [items, setItems] = useState([]);
+  const [screen, setScreen] = useState("welcome");
 
   useEffect(() => {
     setSession(supabase.auth.session());
@@ -40,6 +42,8 @@ export const AppContextProvider = (props) => {
         items: items,
         setItems: setItems,
         fetchItems: fetchItems,
+        screen: screen,
+        setScreen: setScreen,
       }}
     >
       {props.children}

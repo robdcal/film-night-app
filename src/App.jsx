@@ -7,24 +7,33 @@ import { Container } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import BottomBar from "./components/BottomBar";
 import AppContext from "./contexts/AppContext";
+import Groups from "./components/Groups";
 
 const App = () => {
-  const { session } = useContext(AppContext);
+  const { session, screen } = useContext(AppContext);
+
+  const screenSwitch = () => {
+    switch (screen) {
+      case "welcome":
+        return <Auth />;
+      case "groups":
+        return <Groups />;
+      case "group":
+        return (
+          <Fragment>
+            <ItemList key={session.user.id} session={session} />
+            <BottomBar session={session} />
+          </Fragment>
+        );
+      default:
+        return <Auth />;
+    }
+  };
 
   return (
     <Container maxWidth="sm">
       <CssBaseline />
-      <Typography component="h1" variant="h3" align="center" mt={4}>
-        Name TBC
-      </Typography>
-      {!session ? (
-        <Auth />
-      ) : (
-        <Fragment>
-          <ItemList key={session.user.id} session={session} />
-          <BottomBar session={session} />
-        </Fragment>
-      )}
+      {screenSwitch()}
     </Container>
   );
 };

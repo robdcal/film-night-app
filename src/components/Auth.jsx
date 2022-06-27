@@ -1,9 +1,12 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
+import AppContext from "../contexts/AppContext";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
+  const { setScreen } = useContext(AppContext);
 
   const signInWithGoogle = async () => {
     try {
@@ -19,8 +22,17 @@ export default function Auth() {
     }
   };
 
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN") setScreen("groups");
+    });
+  }, []);
+
   return (
     <Fragment>
+      <Typography component="h1" variant="h3" align="center" mt={4}>
+        ClubUp
+      </Typography>
       {loading ? (
         "Signing in..."
       ) : (
