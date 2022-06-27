@@ -14,7 +14,15 @@ Create a group, build a list of films to watch (or books to read, or games to pl
 - ~~Move state to Context~~
 - ~~Automatically update (re-render) list after adding / deleting / editing~~
 - ~~Make it more generic (not only films) - books, games, etc~~
-- Setup 'groups' feature with corresponding auth checks
+- ~~Add a group~~
+- ~~List groups~~
+- Invite users to group
+- Edit name of group
+- Leave group
+- Delete group
+- Open group
+- Decline invite to group
+- Accept invite to group
 - Pull synopsis from movie database & store in Supabase
 - Add summary screen (basic analytics / data vis)
 - Sortable table
