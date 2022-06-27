@@ -7,12 +7,16 @@ const AppContext = createContext({
   setItems: () => {},
   fetchItems: () => {},
   screen: "welcome",
+  fetchUserGroups: () => {},
+  userGroups: [],
+  addUserToGroup: () => {},
 });
 
 export const AppContextProvider = (props) => {
   const [session, setSession] = useState(null);
   const [items, setItems] = useState([]);
   const [screen, setScreen] = useState("welcome");
+  const [userGroups, setUserGroups] = useState([]);
 
   useEffect(() => {
     setSession(supabase.auth.session());
@@ -23,7 +27,7 @@ export const AppContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    fetchItems().catch(console.error);
+    // fetchItems().catch(console.error);
   }, []);
 
   const fetchItems = async () => {
@@ -35,6 +39,34 @@ export const AppContextProvider = (props) => {
     else setItems(items);
   };
 
+  const fetchUserGroups = async () => {
+    let { data: userGroups, error } = await supabase
+      .from("groups_users")
+      .select(
+        `
+      *,
+      group:groups (
+        name
+      )
+      `
+      )
+      .match({ user_id: session.user.id, status: "member" })
+      .order("group_id", { ascending: false });
+    if (error) console.log("error", error);
+    else setUserGroups(userGroups);
+  };
+
+  const addUserToGroup = async (group_id, user_id, status) => {
+    try {
+      const newEntry = { group_id: group_id, user_id: user_id, status: status };
+      const { data, error } = await supabase
+        .from("groups_users")
+        .insert([newEntry]);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -44,6 +76,9 @@ export const AppContextProvider = (props) => {
         fetchItems: fetchItems,
         screen: screen,
         setScreen: setScreen,
+        userGroups: userGroups,
+        fetchUserGroups: fetchUserGroups,
+        addUserToGroup: addUserToGroup,
       }}
     >
       {props.children}

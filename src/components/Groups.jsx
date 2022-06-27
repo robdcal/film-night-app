@@ -1,64 +1,90 @@
-import { Fragment } from "react";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import AddIcon from "@mui/icons-material/Add";
 import Box from "@mui/material/Box";
+import CreateGroup from "./CreateGroup";
+import { useState, useContext, useEffect } from "react";
+import AppContext from "../contexts/AppContext";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const Groups = () => {
+  const { userGroups, fetchUserGroups } = useContext(AppContext);
+
+  useEffect(() => {
+    fetchUserGroups();
+  }, []);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const openGroupMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const closeGroupMenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Fragment>
-      <Typography component="h1" variant="h3" align="center" mt={4}>
-        Your groups
-      </Typography>
-      <Typography>
-        Open group + delete group + leave group + edit name
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      <Typography component="h2" variant="h4" align="center" mb={2}>
+        Current groups
       </Typography>
       <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Group name</TableCell>
-              <TableCell align="right"></TableCell>
-            </TableRow>
-          </TableHead>
+        <Table size="small">
           <TableBody>
-            <TableRow>
-              <TableCell>Group #1</TableCell>
-              <TableCell align="right">
-                <IconButton component="button">
-                  <MoreVertIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
+            {userGroups.map((group, index) => (
+              <TableRow key={index}>
+                <TableCell>{group.group.name}</TableCell>
+                <TableCell align="right">
+                  <IconButton component="button" onClick={openGroupMenu}>
+                    <MoreVertIcon />
+                  </IconButton>
+                </TableCell>
+                <Menu anchorEl={anchorEl} open={open} onClose={closeGroupMenu}>
+                  <MenuItem onClick={closeGroupMenu}>Invite users</MenuItem>
+                  <MenuItem onClick={closeGroupMenu}>Edit name</MenuItem>
+                  <MenuItem onClick={closeGroupMenu}>Leave group</MenuItem>
+                  <MenuItem onClick={closeGroupMenu}>Delete group</MenuItem>
+                </Menu>
+              </TableRow>
+            ))}
             <TableRow>
               <TableCell align="center" colSpan={2}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography>Create group</Typography>
-                  <AddIcon />
-                </Box>
+                <CreateGroup />
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography component="h1" variant="h3" align="center" mt={4}>
+      <Typography component="h2" variant="h4" align="center" mt={8} mb={2}>
         Invites
       </Typography>
-      <Typography>Accept invite + delete invite</Typography>
-    </Fragment>
+      <TableContainer>
+        <Table size="small">
+          <TableBody>
+            <TableRow>
+              <TableCell>Group #1</TableCell>
+              <TableCell align="right">
+                <Button color="error">Decline</Button>
+                <Button variant="outlined">Accept</Button>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 
