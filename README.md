@@ -24,4 +24,5 @@ Create a group, build a list of films to watch (or books to read, or games to pl
 - Host app
 - Convert to TypeScript
 - Write tests
+- Improve security
 - Allow user to manually re-order list (and remember it)
