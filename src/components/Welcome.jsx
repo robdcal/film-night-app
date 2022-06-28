@@ -1,7 +1,7 @@
 import { Fragment, useState, useContext, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import Button from "@mui/material/Button";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import AppContext from "../contexts/AppContext";
 
 export default function Auth() {
@@ -29,17 +29,24 @@ export default function Auth() {
   }, []);
 
   return (
-    <Fragment>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
       <Typography component="h1" variant="h3" align="center" mt={4}>
-        ClubUp
+        Film Night
       </Typography>
       {loading ? (
         "Signing in..."
       ) : (
-        <Button variant="contained" onClick={signInWithGoogle}>
+        <Button variant="contained" onClick={signInWithGoogle} sx={{ mt: 4 }}>
           Sign in with Google
         </Button>
       )}
-    </Fragment>
+    </Box>
   );
 }
