@@ -16,6 +16,7 @@ Create a group, build a list of films to watch (or books to read, or games to pl
 - ~~Make it more generic (not only films) - books, games, etc~~
 - ~~Add a group~~
 - ~~List groups~~
+- ~~Revert to just Films~~
 - Open group
 - Edit name of group
 - Leave group
