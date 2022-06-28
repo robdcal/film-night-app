@@ -50,7 +50,8 @@ export const AppContextProvider = (props) => {
       )
       `
       )
-      .match({ user_id: session.user.id, status: "member" })
+      .match({ user_id: session.user.id })
+      .or("status.eq.member,status.eq.pending")
       .order("group_id", { ascending: false });
     if (error) console.log("error", error);
     else setUserGroups(userGroups);

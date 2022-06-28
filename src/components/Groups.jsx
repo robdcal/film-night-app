@@ -1,17 +1,21 @@
-import { Button, Typography } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
-import IconButton from "@mui/material/IconButton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Box from "@mui/material/Box";
+import { Fragment, useState, useContext, useEffect } from "react";
 import CreateGroup from "./CreateGroup";
-import { useState, useContext, useEffect } from "react";
 import AppContext from "../contexts/AppContext";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import {
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  IconButton,
+  Box,
+  Menu,
+  MenuItem,
+  Chip,
+} from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 const Groups = () => {
   const { userGroups, fetchUserGroups } = useContext(AppContext);
@@ -20,13 +24,21 @@ const Groups = () => {
     fetchUserGroups();
   }, []);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const openGroupMenu = (event) => {
-    setAnchorEl(event.currentTarget);
+  const [anchorElMember, setAnchorElMember] = useState(null);
+  const openMember = Boolean(anchorElMember);
+  const openGroupMemberMenu = (event) => {
+    setAnchorElMember(event.currentTarget);
   };
-  const closeGroupMenu = () => {
-    setAnchorEl(null);
+  const closeGroupMemberMenu = () => {
+    setAnchorElMember(null);
+  };
+  const [anchorElPending, setAnchorElPending] = useState(null);
+  const openPending = Boolean(anchorElPending);
+  const openGroupPendingMenu = (event) => {
+    setAnchorElPending(event.currentTarget);
+  };
+  const closeGroupPendingMenu = () => {
+    setAnchorElPending(null);
   };
 
   return (
@@ -38,8 +50,8 @@ const Groups = () => {
         justifyContent: "center",
       }}
     >
-      <Typography component="h2" variant="h4" align="center" mb={2}>
-        Current groups
+      <Typography component="h2" variant="h5" align="center" mb={2}>
+        Your Clubs
       </Typography>
       <TableContainer>
         <Table size="small">
@@ -47,43 +59,73 @@ const Groups = () => {
             {userGroups.map((group, index) => (
               <TableRow key={index}>
                 <TableCell>{group.group.name}</TableCell>
-                <TableCell align="right">
-                  <IconButton component="button" onClick={openGroupMenu}>
-                    <MoreVertIcon />
-                  </IconButton>
-                </TableCell>
-                <Menu anchorEl={anchorEl} open={open} onClose={closeGroupMenu}>
-                  <MenuItem onClick={closeGroupMenu}>Invite users</MenuItem>
-                  <MenuItem onClick={closeGroupMenu}>Edit name</MenuItem>
-                  <MenuItem onClick={closeGroupMenu}>Leave group</MenuItem>
-                  <MenuItem onClick={closeGroupMenu}>Delete group</MenuItem>
-                </Menu>
+                {group.status === "member" && (
+                  <Fragment>
+                    <TableCell align="right">
+                      <IconButton
+                        component="button"
+                        onClick={openGroupMemberMenu}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                    </TableCell>
+                    <Menu
+                      anchorEl={anchorElMember}
+                      open={openMember}
+                      onClose={closeGroupMemberMenu}
+                    >
+                      <MenuItem onClick={closeGroupMemberMenu}>
+                        Invite users
+                      </MenuItem>
+                      <MenuItem onClick={closeGroupMemberMenu}>
+                        Edit name
+                      </MenuItem>
+                      <MenuItem onClick={closeGroupMemberMenu}>
+                        Leave group
+                      </MenuItem>
+                      <MenuItem onClick={closeGroupMemberMenu}>
+                        Delete group
+                      </MenuItem>
+                    </Menu>
+                  </Fragment>
+                )}
+                {group.status === "pending" && (
+                  <Fragment>
+                    <TableCell align="right">
+                      <Chip
+                        label="Invited"
+                        color="primary"
+                        variant="outlined"
+                        icon={<MailOutlineIcon />}
+                        size="small"
+                      />
+                      <IconButton
+                        component="button"
+                        onClick={openGroupPendingMenu}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                    </TableCell>
+                    <Menu
+                      anchorEl={anchorElPending}
+                      open={openPending}
+                      onClose={closeGroupPendingMenu}
+                    >
+                      <MenuItem onClick={closeGroupPendingMenu}>
+                        Accept invite
+                      </MenuItem>
+                      <MenuItem onClick={closeGroupPendingMenu}>
+                        Decline invite
+                      </MenuItem>
+                    </Menu>
+                  </Fragment>
+                )}
               </TableRow>
             ))}
-            <TableRow>
-              <TableCell align="center" colSpan={2}>
-                <CreateGroup />
-              </TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography component="h2" variant="h4" align="center" mt={8} mb={2}>
-        Invites
-      </Typography>
-      <TableContainer>
-        <Table size="small">
-          <TableBody>
-            <TableRow>
-              <TableCell>Group #1</TableCell>
-              <TableCell align="right">
-                <Button color="error">Decline</Button>
-                <Button variant="outlined">Accept</Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <CreateGroup />
     </Box>
   );
 };
