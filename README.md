@@ -16,11 +16,11 @@ Create a group, build a list of films to watch (or books to read, or games to pl
 - ~~Make it more generic (not only films) - books, games, etc~~
 - ~~Add a group~~
 - ~~List groups~~
-- Invite users to group
+- Open group
 - Edit name of group
 - Leave group
 - Delete group
-- Open group
+- Invite users to group
 - Decline invite to group
 - Accept invite to group
 - Pull synopsis from movie database & store in Supabase
