@@ -1,7 +1,7 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { useContext } from "react";
 import { Fragment } from "react";
-import Auth from "./components/Auth";
+import Welcome from "./components/Welcome";
 import ItemList from "./components/ItemList";
 import { Container } from "@mui/system";
 import Typography from "@mui/material/Typography";
@@ -15,7 +15,7 @@ const App = () => {
   const screenSwitch = () => {
     switch (screen) {
       case "welcome":
-        return <Auth />;
+        return <Welcome />;
       case "groups":
         return <Groups />;
       case "group":
@@ -26,7 +26,7 @@ const App = () => {
           </Fragment>
         );
       default:
-        return <Auth />;
+        return <Welcome />;
     }
   };
 
