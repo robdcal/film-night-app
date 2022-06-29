@@ -20,7 +20,7 @@ import AppContext from "../contexts/AppContext";
 const EditItem = ({ index, item, watchedToggle }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const [owner, setOwner] = useState("");
+  const [addedBy, setAddedBy] = useState("");
   const [watched, setWatched] = useState(false);
   const [cRating, setCRating] = useState(0);
   const [rRating, setRRating] = useState(0);
@@ -33,7 +33,7 @@ const EditItem = ({ index, item, watchedToggle }) => {
 
   const handleClickOpen = () => {
     setName(item.name || "");
-    setOwner(item.owner || "");
+    setAddedBy(item.added_by || "");
     setWatched(item.watched || false);
     setCRating(item.c_rating || "");
     setRRating(item.r_rating || "");
@@ -51,7 +51,7 @@ const EditItem = ({ index, item, watchedToggle }) => {
         .from("items")
         .update({
           name: name,
-          owner: owner || null,
+          added_by: addedBy || null,
           watched: watched,
           c_rating: parseInt(cRating) || null,
           r_rating: parseInt(rRating) || null,
@@ -61,7 +61,7 @@ const EditItem = ({ index, item, watchedToggle }) => {
       const updatedItem = {
         item_id: item.item_id,
         name: name,
-        owner: owner,
+        added_by: addedBy,
         watched: watched,
         c_rating: parseInt(cRating),
         r_rating: parseInt(rRating),
@@ -105,15 +105,7 @@ const EditItem = ({ index, item, watchedToggle }) => {
             fullWidth
           />
           <Typography>{`Added on ${createdDate}`}</Typography>
-          <Typography>{`by ${owner}`}</Typography>
-          {/* <TextField
-            margin="normal"
-            label="Owner"
-            variant="outlined"
-            value={owner}
-            onChange={(e) => setOwner(e.target.value)}
-            fullWidth
-          /> */}
+          <Typography>{`by ${addedBy}`}</Typography>
           <FormControlLabel
             control={
               <Checkbox
