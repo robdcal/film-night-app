@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import EditGroupName from "./EditGroupName";
 
 const Groups = () => {
   const { userGroups, fetchUserGroups, setScreen, setCurrentGroup } =
@@ -91,9 +92,11 @@ const Groups = () => {
                       <MenuItem onClick={closeGroupMemberMenu}>
                         Invite users
                       </MenuItem>
-                      <MenuItem onClick={closeGroupMemberMenu}>
-                        Edit name
-                      </MenuItem>
+                      <EditGroupName
+                        closeGroupMemberMenu={closeGroupMemberMenu}
+                        groupName={group.group.name}
+                        group_id={group.group_id}
+                      />
                       <MenuItem onClick={closeGroupMemberMenu}>
                         Leave group
                       </MenuItem>
