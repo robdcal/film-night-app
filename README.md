@@ -22,7 +22,7 @@ Create a group, build a list of films to watch and rate them!
 - ~~Display name of group~~
 - ~~Edit name of group~~
 - ~~Leave group~~
-- Delete group
+- ~~Delete group~~
 - Invite users to group
 - Decline invite to group
 - Accept invite to group
@@ -37,3 +37,6 @@ Create a group, build a list of films to watch and rate them!
 - Write tests
 - Improve security
 - Allow user to manually re-order list (and remember it)
+- Prevent member leaving group if last member (must delete)
+- Ensure deleting a group deletes all associated data items
+- Restrict deletion of group to group creator / admin
