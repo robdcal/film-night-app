@@ -74,7 +74,7 @@ const ItemList = () => {
                 <TableCell component="th" scope="row">
                   {item.name}
                 </TableCell>
-                <TableCell>{item.owner}</TableCell>
+                <TableCell>{item.added_by}</TableCell>
                 {watchedToggle === "watched" && (
                   <TableCell>
                     {item.c_rating && item.r_rating

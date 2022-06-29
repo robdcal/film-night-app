@@ -41,6 +41,19 @@ export const AppContextProvider = (props) => {
       .order("item_id", { ascending: false });
     if (error) console.log("error", error);
     else setItems(items);
+    items.map(async (item, index) => {
+      let { data, error } = await supabase
+        .from("users")
+        .select("username")
+        .match({ user_id: item.user_id });
+      if (error) console.log("error", error);
+      else {
+        const updatedItem = { ...item, added_by: data[0].username };
+        const updatedItems = [...items];
+        updatedItems[index] = updatedItem;
+        setItems(updatedItems);
+      }
+    });
   };
 
   const fetchUserGroups = async () => {
