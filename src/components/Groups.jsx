@@ -18,6 +18,7 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import EditGroupName from "./EditGroupName";
+import LeaveGroup from "./LeaveGroup";
 
 const Groups = () => {
   const { userGroups, fetchUserGroups, setScreen, setCurrentGroup } =
@@ -97,9 +98,11 @@ const Groups = () => {
                         groupName={group.group.name}
                         group_id={group.group_id}
                       />
-                      <MenuItem onClick={closeGroupMemberMenu}>
-                        Leave group
-                      </MenuItem>
+                      <LeaveGroup
+                        closeGroupMemberMenu={closeGroupMemberMenu}
+                        groupName={group.group.name}
+                        group_id={group.group_id}
+                      />
                       <MenuItem onClick={closeGroupMemberMenu}>
                         Delete group
                       </MenuItem>
