@@ -20,7 +20,7 @@ Create a group, build a list of films to watch and rate them!
 - ~~Open group~~
 - ~~Fetch added_by username dynamically~~
 - ~~Display name of group~~
-- Edit name of group
+- ~~Edit name of group~~
 - Leave group
 - Delete group
 - Invite users to group
