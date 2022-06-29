@@ -10,6 +10,8 @@ const AppContext = createContext({
   fetchUserGroups: () => {},
   userGroups: [],
   addUserToGroup: () => {},
+  currentGroup: null,
+  setCurrentGroup: () => {},
 });
 
 export const AppContextProvider = (props) => {
@@ -17,6 +19,7 @@ export const AppContextProvider = (props) => {
   const [items, setItems] = useState([]);
   const [screen, setScreen] = useState("welcome");
   const [userGroups, setUserGroups] = useState([]);
+  const [currentGroup, setCurrentGroup] = useState(null);
 
   useEffect(() => {
     setSession(supabase.auth.session());
@@ -34,6 +37,7 @@ export const AppContextProvider = (props) => {
     let { data: items, error } = await supabase
       .from("items")
       .select("*")
+      .match({ group_id: currentGroup })
       .order("item_id", { ascending: false });
     if (error) console.log("error", error);
     else setItems(items);
@@ -80,6 +84,8 @@ export const AppContextProvider = (props) => {
         userGroups: userGroups,
         fetchUserGroups: fetchUserGroups,
         addUserToGroup: addUserToGroup,
+        currentGroup: currentGroup,
+        setCurrentGroup: setCurrentGroup,
       }}
     >
       {props.children}

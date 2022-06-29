@@ -13,12 +13,14 @@ import {
   Menu,
   MenuItem,
   Chip,
+  Button,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 const Groups = () => {
-  const { userGroups, fetchUserGroups } = useContext(AppContext);
+  const { userGroups, fetchUserGroups, setScreen, setCurrentGroup } =
+    useContext(AppContext);
 
   useEffect(() => {
     fetchUserGroups();
@@ -39,6 +41,11 @@ const Groups = () => {
   };
   const closeGroupPendingMenu = () => {
     setAnchorElPending(null);
+  };
+
+  const openGroup = (group_id) => {
+    setCurrentGroup(group_id);
+    setScreen("group");
   };
 
   return (
@@ -62,6 +69,9 @@ const Groups = () => {
                 {group.status === "member" && (
                   <Fragment>
                     <TableCell align="right">
+                      <Button onClick={() => openGroup(group.group_id)}>
+                        Open
+                      </Button>
                       <IconButton
                         component="button"
                         onClick={openGroupMemberMenu}

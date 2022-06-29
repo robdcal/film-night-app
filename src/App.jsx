@@ -1,13 +1,10 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { useContext } from "react";
-import { Fragment } from "react";
 import Welcome from "./components/Welcome";
-import ItemList from "./components/ItemList";
 import { Container } from "@mui/system";
-import Typography from "@mui/material/Typography";
-import BottomBar from "./components/BottomBar";
 import AppContext from "./contexts/AppContext";
 import Groups from "./components/Groups";
+import Group from "./components/Group";
 
 const App = () => {
   const { session, screen } = useContext(AppContext);
@@ -19,12 +16,7 @@ const App = () => {
       case "groups":
         return <Groups />;
       case "group":
-        return (
-          <Fragment>
-            <ItemList key={session.user.id} session={session} />
-            <BottomBar session={session} />
-          </Fragment>
-        );
+        return <Group />;
       default:
         return <Welcome />;
     }

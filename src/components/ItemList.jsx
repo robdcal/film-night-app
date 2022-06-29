@@ -14,10 +14,11 @@ import AppContext from "../contexts/AppContext";
 
 const ItemList = () => {
   const [watchedToggle, setWatchedToggle] = useState("watchlist");
-  const { session, items, setItems } = useContext(AppContext);
+  const { session, items, setItems, fetchItems } = useContext(AppContext);
 
   useEffect(() => {
     updateUsername();
+    fetchItems();
   }, []);
 
   const updateUsername = async () => {
@@ -61,7 +62,7 @@ const ItemList = () => {
           <TableHead>
             <TableRow>
               <TableCell>Item Name</TableCell>
-              <TableCell>Owner</TableCell>
+              <TableCell>Added by</TableCell>
               {watchedToggle === "watched" && <TableCell>Rating</TableCell>}
               <TableCell></TableCell>
               <TableCell></TableCell>

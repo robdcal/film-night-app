@@ -23,7 +23,8 @@ const StyledFab = styled(Fab)({
 const AddItem = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const { session, items, setItems, fetchItems } = useContext(AppContext);
+  const { session, items, setItems, fetchItems, currentGroup } =
+    useContext(AppContext);
 
   const handleClickOpen = () => {
     setName("");
@@ -36,7 +37,11 @@ const AddItem = () => {
 
   const addNewItem = async () => {
     try {
-      const newItem = { name: name, owner: session.user.user_metadata.name };
+      const newItem = {
+        name: name,
+        group_id: currentGroup,
+        user_id: session.user.id,
+      };
       const { data, error } = await supabase.from("items").insert([newItem]);
       fetchItems();
       handleClose();
