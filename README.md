@@ -1,6 +1,6 @@
 # Film Night app (name TBC)
 
-Create a group, build a list of films to watch (or books to read, or games to play) and rate them!
+Create a group, build a list of films to watch and rate them!
 
 ## To do
 
@@ -17,7 +17,8 @@ Create a group, build a list of films to watch (or books to read, or games to pl
 - ~~Add a group~~
 - ~~List groups~~
 - ~~Revert to just Films~~
-- Open group
+- ~~Open group~~
+- ~~Fetch added_by username dynamically~~
 - Edit name of group
 - Leave group
 - Delete group
