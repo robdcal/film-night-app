@@ -39,7 +39,7 @@ const AddItem = () => {
     try {
       const newItem = {
         name: name,
-        group_id: currentGroup,
+        group_id: currentGroup.group_id,
         user_id: session.user.id,
       };
       const { data, error } = await supabase.from("items").insert([newItem]);

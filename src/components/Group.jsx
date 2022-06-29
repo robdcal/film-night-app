@@ -6,7 +6,7 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 
 const Group = () => {
-  const { session } = useContext(AppContext);
+  const { session, currentGroup } = useContext(AppContext);
 
   return (
     <Box
@@ -17,7 +17,7 @@ const Group = () => {
       }}
     >
       <Typography component="h2" variant="h5" align="center" mt={4} mb={2}>
-        Group name here
+        {currentGroup.name}
       </Typography>
       <ItemList key={session.user.id} session={session} />
       <BottomBar session={session} />

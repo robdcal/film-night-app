@@ -10,7 +10,7 @@ const AppContext = createContext({
   fetchUserGroups: () => {},
   userGroups: [],
   addUserToGroup: () => {},
-  currentGroup: null,
+  currentGroup: {},
   setCurrentGroup: () => {},
 });
 
@@ -19,7 +19,7 @@ export const AppContextProvider = (props) => {
   const [items, setItems] = useState([]);
   const [screen, setScreen] = useState("welcome");
   const [userGroups, setUserGroups] = useState([]);
-  const [currentGroup, setCurrentGroup] = useState(null);
+  const [currentGroup, setCurrentGroup] = useState({});
 
   useEffect(() => {
     setSession(supabase.auth.session());

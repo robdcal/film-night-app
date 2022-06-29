@@ -43,8 +43,8 @@ const Groups = () => {
     setAnchorElPending(null);
   };
 
-  const openGroup = (group_id) => {
-    setCurrentGroup(group_id);
+  const openGroup = (group_id, name) => {
+    setCurrentGroup({ group_id: group_id, name: name });
     setScreen("group");
   };
 
@@ -69,7 +69,11 @@ const Groups = () => {
                 {group.status === "member" && (
                   <Fragment>
                     <TableCell align="right">
-                      <Button onClick={() => openGroup(group.group_id)}>
+                      <Button
+                        onClick={() =>
+                          openGroup(group.group_id, group.group.name)
+                        }
+                      >
                         Open
                       </Button>
                       <IconButton
