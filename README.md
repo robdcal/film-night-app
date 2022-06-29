@@ -19,6 +19,7 @@ Create a group, build a list of films to watch and rate them!
 - ~~Revert to just Films~~
 - ~~Open group~~
 - ~~Fetch added_by username dynamically~~
+- ~~Display name of group~~
 - Edit name of group
 - Leave group
 - Delete group
