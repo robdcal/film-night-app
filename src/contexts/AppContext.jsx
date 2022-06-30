@@ -34,30 +34,32 @@ export const AppContextProvider = (props) => {
   }, []);
 
   const fetchItems = async () => {
-    let { data: items, error } = await supabase
+    let { data: fetchedItems, error } = await supabase
       .from("items")
       .select("*")
-      .match({ group_id: currentGroup })
+      .match({ group_id: currentGroup.group_id })
       .order("item_id", { ascending: false });
     if (error) console.log("error", error);
-    else setItems(items);
-    items.map(async (item, index) => {
-      let { data, error } = await supabase
-        .from("users")
-        .select("username")
-        .match({ user_id: item.user_id });
-      if (error) console.log("error", error);
-      else {
-        const updatedItem = { ...item, added_by: data[0].username };
-        const updatedItems = [...items];
-        updatedItems[index] = updatedItem;
-        setItems(updatedItems);
-      }
-    });
+    else setItems(fetchedItems);
+    if (items.length > 0) {
+      items.map(async (item, index) => {
+        let { data, error } = await supabase
+          .from("users")
+          .select("username")
+          .match({ user_id: item.user_id });
+        if (error) console.log("error", error);
+        else {
+          const updatedItem = { ...item, added_by: data[0].username };
+          const updatedItems = [...items];
+          updatedItems[index] = updatedItem;
+          setItems(updatedItems);
+        }
+      });
+    }
   };
 
   const fetchUserGroups = async () => {
-    let { data: userGroups, error } = await supabase
+    let { data: fetchedUserGroups, error } = await supabase
       .from("groups_users")
       .select(
         `
@@ -71,7 +73,7 @@ export const AppContextProvider = (props) => {
       .or("status.eq.member,status.eq.pending")
       .order("group_id", { ascending: false });
     if (error) console.log("error", error);
-    else setUserGroups(userGroups);
+    else setUserGroups(fetchedUserGroups);
   };
 
   const addUserToGroup = async (group_id, user_id, status) => {
