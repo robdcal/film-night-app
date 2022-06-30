@@ -23,7 +23,7 @@ Create a group, build a list of films to watch and rate them!
 - ~~Edit name of group~~
 - ~~Leave group~~
 - ~~Delete group~~
-- Invite users to group
+- ~~Invite users to group~~
 - Decline invite to group
 - Accept invite to group
 - Pull synopsis from movie database & store in Supabase
