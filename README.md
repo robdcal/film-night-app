@@ -26,17 +26,21 @@ Create a group, build a list of films to watch and rate them!
 - ~~Invite users to group~~
 - ~~Decline invite to group~~
 - ~~Accept invite to group~~
+- Fix "added by" not showing properly
+- Use localStorage to persist session
+- Prevent member leaving group if last member (must delete)
+- Ensure deleting a group deletes all associated data items
+- Pass on group creator / admin role when leaving group
+- Restrict group name editing to group creator / admin
+- Restrict deletion of group to group creator / admin
+- Move API calls to node server
+- Host app
+- Improve visuals
+- Convert to TypeScript
+- Write tests
+- Improve security (RLS, checks, etc)
 - Pull synopsis from movie database & store in Supabase
 - Add summary screen (basic analytics / data vis)
 - Sortable table
 - Filters for table
-- Improve visuals
-- Move API calls to node server
-- Host app
-- Convert to TypeScript
-- Write tests
-- Improve security
 - Allow user to manually re-order list (and remember it)
-- Prevent member leaving group if last member (must delete)
-- Ensure deleting a group deletes all associated data items
-- Restrict deletion of group to group creator / admin
