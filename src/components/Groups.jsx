@@ -1,3 +1,4 @@
+import { supabase } from "../supabaseClient";
 import { Fragment, useState, useContext, useEffect } from "react";
 import CreateGroup from "./CreateGroup";
 import AppContext from "../contexts/AppContext";
@@ -23,7 +24,7 @@ import DeleteGroup from "./DeleteGroup";
 import InviteUsers from "./InviteUsers";
 
 const Groups = () => {
-  const { userGroups, fetchUserGroups, setScreen, setCurrentGroup } =
+  const { session, userGroups, fetchUserGroups, setScreen, setCurrentGroup } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -50,6 +51,38 @@ const Groups = () => {
   const openGroup = (group_id, name) => {
     setCurrentGroup({ group_id: group_id, name: name });
     setScreen("group");
+  };
+
+  const acceptInvite = async (group_id) => {
+    // accept the invite
+    // update the status column in the groups_users table
+    try {
+      const { data, error } = await supabase
+        .from("groups_users")
+        .update({
+          status: "member",
+        })
+        .match({ group_id: group_id, user_id: session.user.id });
+      fetchUserGroups();
+      closeGroupPendingMenu();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const declineInvite = async (group_id) => {
+    // decline the invite
+    // remove the user from the groups_users table
+    try {
+      const { data, error } = await supabase
+        .from("groups_users")
+        .delete()
+        .match({ group_id: group_id, user_id: session.user.id });
+      fetchUserGroups();
+      closeGroupPendingMenu();
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -137,10 +170,10 @@ const Groups = () => {
                       open={openPending}
                       onClose={closeGroupPendingMenu}
                     >
-                      <MenuItem onClick={closeGroupPendingMenu}>
+                      <MenuItem onClick={() => acceptInvite(group.group_id)}>
                         Accept invite
                       </MenuItem>
-                      <MenuItem onClick={closeGroupPendingMenu}>
+                      <MenuItem onClick={() => declineInvite(group.group_id)}>
                         Decline invite
                       </MenuItem>
                     </Menu>
