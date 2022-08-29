@@ -26,12 +26,14 @@ Create a group, build a list of films to watch and rate them!
 - ~~Invite users to group~~
 - ~~Decline invite to group~~
 - ~~Accept invite to group~~
-- Fix "added by" not showing properly
+- Make rating inputs generic & number by members in group?
+- Comment code
 - Prevent member leaving group if last member (must delete)
-- Ensure deleting a group deletes all associated data items
 - Pass on group creator / admin role when leaving group
-- Restrict group name editing to group creator / admin
+- Ensure deleting a group deletes all associated data items
 - Restrict deletion of group to group creator / admin
+- Restrict group name editing to group creator / admin
+- Fix "added by" not showing properly
 - Improve security (RLS, checks, etc)
 - Host app
 - Improve visuals
